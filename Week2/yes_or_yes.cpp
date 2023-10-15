@@ -52,49 +52,17 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++)
+        string s;
+        cin >> s;
+        transform(s.begin(), s.end(), s.begin(), ::tolower);
+        if (s == "yes")
         {
-            cin >> v[i];
+            YES;
         }
-        for (int i = 0; i < n; i++)
+        else
         {
-            string s;
-            int x;
-            cin >> x >> s;
-            for (int j = 0; j < x; j++)
-            {
-                if (s[j] != 'D')
-                {
-                    if (v[i] == 0)
-                    {
-                        v[i] = 9;
-                    }
-                    else
-                    {
-                        v[i]--;
-                    }
-                }
-                else
-                {
-                    if (v[i] == 9)
-                    {
-                        v[i] = 0;
-                    }
-                    else
-                    {
-                        v[i]++;
-                    }
-                }
-            }
+            NO;
         }
-        for (auto val : v)
-        {
-            cout << val << " ";
-        }
-        cout << endl;
     }
 
     return 0;

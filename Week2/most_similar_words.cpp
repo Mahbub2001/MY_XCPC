@@ -52,49 +52,31 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++)
+        int n, m;
+        cin >> n >> m;
+        vector<string> s(n + 1);
+        for (int i = 1; i <= n; i++)
         {
-            cin >> v[i];
+            cin >> s[i];
         }
-        for (int i = 0; i < n; i++)
+        int mn = INT_MAX;
+        for (int i = 1; i <= n; i++)
         {
-            string s;
-            int x;
-            cin >> x >> s;
-            for (int j = 0; j < x; j++)
+            for (int j = 1; j <= n; j++)
             {
-                if (s[j] != 'D')
+                int cur = 0;
+                if (i == j)
                 {
-                    if (v[i] == 0)
-                    {
-                        v[i] = 9;
-                    }
-                    else
-                    {
-                        v[i]--;
-                    }
+                    continue;
                 }
-                else
+                for (int k = 0; k < m; k++)
                 {
-                    if (v[i] == 9)
-                    {
-                        v[i] = 0;
-                    }
-                    else
-                    {
-                        v[i]++;
-                    }
+                    cur += abs((s[i][k] - s[j][k]));
                 }
+                mn = min(mn, cur);
             }
         }
-        for (auto val : v)
-        {
-            cout << val << " ";
-        }
-        cout << endl;
+        cout << mn << endl;
     }
 
     return 0;

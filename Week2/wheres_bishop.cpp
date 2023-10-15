@@ -52,49 +52,30 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++)
+        char arr[9][9];
+        for (int i = 0; i < 8; i++)
         {
-            cin >> v[i];
-        }
-        for (int i = 0; i < n; i++)
-        {
-            string s;
-            int x;
-            cin >> x >> s;
-            for (int j = 0; j < x; j++)
+            for (int j = 0; j < 8; j++)
             {
-                if (s[j] != 'D')
+                cin >> arr[i][j];
+            }
+        }
+
+        for (int i = 1; i < 7; i++)
+        {
+            for (int j = 1; j < 7; j++)
+            {
+                if (arr[i][j] == '#' &&
+                    arr[i + 1][j + 1] == '#' &&
+                    arr[i - 1][j - 1] == '#' &&
+                    arr[i - 1][j + 1] == '#' &&
+                    arr[i + 1][j - 1] == '#')
                 {
-                    if (v[i] == 0)
-                    {
-                        v[i] = 9;
-                    }
-                    else
-                    {
-                        v[i]--;
-                    }
-                }
-                else
-                {
-                    if (v[i] == 9)
-                    {
-                        v[i] = 0;
-                    }
-                    else
-                    {
-                        v[i]++;
-                    }
+                    cout << i + 1 << " " << j + 1 << endl;
+                    break;
                 }
             }
         }
-        for (auto val : v)
-        {
-            cout << val << " ";
-        }
-        cout << endl;
     }
 
     return 0;

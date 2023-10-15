@@ -48,54 +48,21 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--)
+    long long n;
+    cin >> n;
+    long long s = 0;
+    for (long long i = 1; i <= n; i++)
     {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++)
+        for (long long j = 1; j <= n; j++)
         {
-            cin >> v[i];
-        }
-        for (int i = 0; i < n; i++)
-        {
-            string s;
-            int x;
-            cin >> x >> s;
-            for (int j = 0; j < x; j++)
+            for (long long k = 1; k <= n; k++)
             {
-                if (s[j] != 'D')
-                {
-                    if (v[i] == 0)
-                    {
-                        v[i] = 9;
-                    }
-                    else
-                    {
-                        v[i]--;
-                    }
-                }
-                else
-                {
-                    if (v[i] == 9)
-                    {
-                        v[i] = 0;
-                    }
-                    else
-                    {
-                        v[i]++;
-                    }
-                }
+                long long l = __gcd(i, j);
+                s+= __gcd(l, k);
             }
         }
-        for (auto val : v)
-        {
-            cout << val << " ";
-        }
-        cout << endl;
     }
+    cout << s << endl;
 
     return 0;
 }

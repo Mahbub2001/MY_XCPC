@@ -42,60 +42,24 @@ T lcm(T a, T b)
 //     }
 // }
 
+const int N = 1e5+5; 
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--)
+    int n;
+    cin >> n;
+    int ans=0;
+    for (int i = 0; i < n; i++)
     {
-        int n;
-        cin >> n;
-        vector<int> v(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> v[i];
-        }
-        for (int i = 0; i < n; i++)
-        {
-            string s;
-            int x;
-            cin >> x >> s;
-            for (int j = 0; j < x; j++)
-            {
-                if (s[j] != 'D')
-                {
-                    if (v[i] == 0)
-                    {
-                        v[i] = 9;
-                    }
-                    else
-                    {
-                        v[i]--;
-                    }
-                }
-                else
-                {
-                    if (v[i] == 9)
-                    {
-                        v[i] = 0;
-                    }
-                    else
-                    {
-                        v[i]++;
-                    }
-                }
-            }
-        }
-        for (auto val : v)
-        {
-            cout << val << " ";
-        }
-        cout << endl;
+        int x;
+        cin>>x;
+        ans^=x;
     }
+    cout<<ans<<endl;
 
     return 0;
 }
