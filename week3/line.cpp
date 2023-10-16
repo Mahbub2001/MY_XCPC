@@ -41,9 +41,7 @@ T lcm(T a, T b)
 //         }
 //     }
 // }
-const int N = 1e3 + 5;
-long long arr[N][N];
-long long left_side[N], right_side[N];
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -54,60 +52,36 @@ int main()
     cin >> t;
     while (t--)
     {
-        long long n, m, ans = 0;
-        memset(left_side, 0, sizeof(left_side));
-        memset(right_side, 0, sizeof(right_side));
-        cin >> n >> m;
-        for (int i = 1; i <= n; i++)
+        long long n, ans = 0;
+        string s;
+        cin >> n >> s;
+        vector<long long> v;
+        for (long long i = 0; i < n; i++)
         {
-            for (int j = 1; j <= m; j++)
+            if (s[i] == 'R')
             {
-                cin >> arr[i][j];
-                left_side[i + j] += arr[i][j];
-                right_side[i - j + m] += arr[i][j];
+                ans += n - i - 1;
+                v.push_back(2 * i - n + 1);
+            }
+            else
+            {
+                ans += i;
+                v.push_back(n - 1 - 2 * i);
             }
         }
-        long long mx = LLONG_MIN;
-        for (int i = 1; i <= n; i++)
+        sort(v.rbegin(), v.rend());
+        long long j = 0;
+        for (long long i = 0; i < n; i++)
         {
-            for (int j = 1; j <= m; j++)
+            if (v[j] > 0)
             {
-                ans = left_side[i + j] + right_side[i - j + m] - arr[i][j];
-                mx = max(mx, ans);
+                ans += v[j];
+                j++;
             }
+            cout << ans << " ";
         }
-        cout << mx << endl;
+        cout << endl;
     }
+
     return 0;
 }
-
-/*
-
-1 2 2 1
-2 4 2 4
-2 2 3 1
-2 4 2 4
-
-
-1 4 8 7
-4 8 7 11
-8 7 11 3
-7 11 3 4
-
-
-6 5 12 6
-5 12 6 6
-12 6 6 2
-6 6 2 0
-
-
-12 7 12 7
-8 16 10 13
-12 11 20 7
-7 13 7 12
-
-
-*/
-
-
-// https://codeforces.com/problemset/problem/1676/D
