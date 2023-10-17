@@ -52,33 +52,68 @@ int main()
     cin >> t;
     while (t--)
     {
-        long long n, ans = 0;
+        int n;
+        cin >> n;
         string s;
-        cin >> n >> s;
-        vector<long long> v;
-        for (long long i = 0; i < n; i++)
+        cin >> s;
+
+        vector<int> first, second;
+        int ans = 0;
+        for (int i = 0; i < n; i++)
         {
-            if (s[i] == 'R')
+            if (i < n / 2)
             {
-                ans += n - i - 1;
-                v.push_back(2 * i - n + 1);
+                if (s[i] == 'L')
+                    first.push_back(n - i - 1);
             }
             else
             {
+                if (s[i] == 'R')
+                    second.push_back(i);
+            }
+            if (s[i] == 'L')
                 ans += i;
-                v.push_back(n - 1 - 2 * i);
-            }
+            else
+                ans += (n - i - 1);
         }
-        sort(v.rbegin(), v.rend());
-        long long j = 0;
-        for (long long i = 0; i < n; i++)
+        sort(first.begin(), first.end(), greater<int>());
+        sort(second.begin(), second.end(), greater<int>());
+
+        int l1 = 0, l2 = 0;
+
+        for (int i = 1; i <= n; i++)
         {
-            if (v[j] > 0)
+            if (l1 == first.size() && l2 == second.size())
             {
-                ans += v[j];
-                j++;
+                cout << ans << ' ';
             }
-            cout << ans << " ";
+            else if (l1 == first.size())
+            {
+                ans += second[l2];
+                ans -= (n - second[l2++] - 1);
+                cout << ans << ' ';
+            }
+            else if (l2 == second.size())
+            {
+                ans += first[l1];
+                ans -= (n - first[l1++] - 1);
+                cout << ans << ' ';
+            }
+            else
+            {
+                if (first[l1] > second[l2])
+                {
+                    ans += first[l1];
+                    ans -= (n - first[l1++] - 1);
+                    cout << ans << ' ';
+                }
+                else
+                {
+                    ans += second[l2];
+                    ans -= (n - second[l2++] - 1);
+                    cout << ans << ' ';
+                }
+            }
         }
         cout << endl;
     }
