@@ -41,48 +41,57 @@ T lcm(T a, T b)
 //         }
 //     }
 // }
-bool cmp(pair<int, int> a, pair<int, int> b)
-{
-    return a.second < b.second;
-}
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+
     int t;
     cin >> t;
     while (t--)
     {
         int n;
         cin >> n;
-        vector<pair<int, int>> v(n);
+        vector<long long>a(n);
+        vector<pair<long long, long long>> b;
 
         for (int i = 0; i < n; i++)
         {
-            v[i].first = i + 1;
-            v[i].second = 0;
+            cin >> a[i];
+        }
+        sort(a.begin(), a.end(),greater<long long>());
+
+        long long i = 0, j;
+
+        while (i < n)
+        {
+            j = i;
+
+            while (i < n && a[i] == a[j])
+            {
+                i++;
+            }
+
+            b.push_back({a[j], i - j});
         }
 
-        for (int i = 0; i < n; i++)
+        long long ans = b[0].second;
+
+        for (int i = 1; i < b.size(); i++)
         {
-            for (int j = 1; j < n; j++)
+            if (b[i].first + 1 == b[i - 1].first)
             {
-                int x;
-                cin >> x;
-                v[x - 1].second += j;
+                ans = ans + max(b[i].second - b[i - 1].second, 0ll);
+            }
+            else
+            {
+                ans = ans + b[i].second;
             }
         }
 
-        sort(v.begin(), v.end(), cmp);
-
-        for (int i = 0; i < n; i++)
-        {
-            cout << v[i].first << " ";
-        }
-        cout << endl;
+        cout << ans << endl;
     }
-
     return 0;
 }

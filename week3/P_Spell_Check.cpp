@@ -41,47 +41,30 @@ T lcm(T a, T b)
 //         }
 //     }
 // }
-bool cmp(pair<int, int> a, pair<int, int> b)
-{
-    return a.second < b.second;
-}
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+
     int t;
     cin >> t;
     while (t--)
     {
         int n;
-        cin >> n;
-        vector<pair<int, int>> v(n);
-
-        for (int i = 0; i < n; i++)
+        string s;
+        cin >> n >> s;
+        string s1 = "Timru";
+        sort(s.begin(), s.end());
+        if (s == s1)
         {
-            v[i].first = i + 1;
-            v[i].second = 0;
+            YES;
         }
-
-        for (int i = 0; i < n; i++)
+        else
         {
-            for (int j = 1; j < n; j++)
-            {
-                int x;
-                cin >> x;
-                v[x - 1].second += j;
-            }
+            NO;
         }
-
-        sort(v.begin(), v.end(), cmp);
-
-        for (int i = 0; i < n; i++)
-        {
-            cout << v[i].first << " ";
-        }
-        cout << endl;
     }
 
     return 0;
