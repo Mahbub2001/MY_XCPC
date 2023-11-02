@@ -52,33 +52,27 @@ int main()
     cin >> t;
     while (t--)
     {
+         int n;
         string s;
-        cin >> s;
-        long long n = s.size();
-        vector<long long> v(n);
-        vector<pair<long long, long long>> v1;
-        for (long long i = 1; i < n - 1; i++)
-        {
-            if ((s[i] >= s[0] && s[i] <= s[n - 1]) || (s[i] <= s[0] && s[i] >= s[n - 1]))
-            {
-                v1.push_back({s[i], i + 1});
+        cin >> n >> s;
+
+        deque<char> str;
+
+        for (int r = n - 1; r >= 0;) {
+            if (s[r] == '0') {
+                int num = (s[r - 2] - '0') * 10 + (s[r - 1] - '1');
+                str.push_front('a' + num);
+                r -= 3;
+            } else {
+                str.push_front('a' + s[r] - '1');
+                r--;
             }
         }
-        if (s[0] < s[n - 1])
-        {
-            sort(v1.begin(), v1.end());
+
+        for (char ch : str) {
+            cout << ch;
         }
-        else
-        {
-            sort(v1.begin(), v1.end(), greater<pair<long long, long long>>());
-        }
-        cout << abs(s[0] - s[n - 1]) << " " << v1.size() + 2 << endl;
-        cout << "1 ";
-        for (auto val : v1)
-        {
-            cout << val.second << " ";
-        }
-        cout << n << endl;
+        cout << endl;
     }
 
     return 0;
