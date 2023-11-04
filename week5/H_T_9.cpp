@@ -48,52 +48,42 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
-    long long n;
-    cin >> n;
-    vector<long long> v(n);
+    long long k, n;
+    cin >> n >> k;
+
+    vector<long long> a(n);
     for (long long i = 0; i < n; i++)
     {
-        cin >> v[i];
+        cin >> a[i];
     }
-    sort(v.begin(), v.end());
-    long long q;
-    cin >> q;
-    while (q--)
+
+    sort(a.begin(), a.end());
+    long long l = 1, r = a.back();
+
+    while (l < r)
     {
-        long long x;
-        cin >> x;
-        long long l = 0, r = n - 1, mid = 0, ans = -1;
-        while (l <= r)
+        long long mid = l + (r - l + 1) / 2;
+        long long count = 0;
+
+        for (long long i = 0; i < a.size(); i++)
         {
-            mid = l + (r - l) / 2;
-            if (x <= v[mid])
+            if (a[i] > mid)
             {
-                r = mid - 1;
-            }
-            else
-            {
-                ans = v[mid];
-                l = mid + 1;
+                count += (a[i] - mid);
             }
         }
-        if (ans == -1)
+
+        if (count >= k)
         {
-            cout << "X ";
+            l = mid;
         }
         else
         {
-            cout << ans << " ";
-        }
-        ans = upper_bound(v.begin(), v.end(), x) - v.begin();
-        if (ans == n)
-        {
-            cout << "X"<<en;
-        }
-        else
-        {
-            cout << v[ans] << en;
+            r = mid - 1;
         }
     }
+
+    cout << l << endl;
 
     return 0;
 }
