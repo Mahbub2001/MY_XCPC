@@ -48,44 +48,45 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
-    int t;
-    cin >> t;
-    for (int i = 1; i <= t; i++)
+    long long n, m;
+    while (cin >> n >> m)
     {
-        cout << "Case " << i << ": ";
-        long long n, m, mx = LLONG_MIN;
-        cin >> n >> m;
-        vector<long long> v(n);
+        long long a[n];
         for (int i = 0; i < n; i++)
         {
-            cin >> v[i];
-            mx = max(mx, v[i]);
+            cin >> a[i];
         }
-        long long l = mx, r = 1e9 + 5;
+        long long l = 0, r = LLONG_MAX, ans;
         while (l <= r)
         {
-            long long mid = l + (r - l) / 2, sum = 0, count = 1;
+            long long cap = l + (r - l) / 2;
+            long long container = 1, sum = 0;
             for (int i = 0; i < n; i++)
             {
-                if (sum + v[i] > mid)
+                if (a[i] > cap)
                 {
-                    sum = v[i];
-                    count++;
+                    container = LLONG_MAX;
+                    break;
                 }
-                else
+                sum += a[i];
+                if (sum > cap)
                 {
-                    sum += v[i];
-                }
-                if (count <= m)
-                {
-                    r = mid - 1;
-                }
-                else
-                {
-                    l = mid + 1;
+                    container++;
+                    sum = a[i];
                 }
             }
+
+            if (container <= m)
+            {
+                ans = cap;
+                r = cap - 1;
+            }
+            else
+            {
+                l = cap + 1;
+            }
         }
+        cout << ans << endl;
     }
 
     return 0;
