@@ -1,0 +1,1 @@
+{"name":"Local: pD","url":"e:\\Program Files\\XCPC\\week 8\\pD.cpp","tests":[{"id":1700829942809,"input":"())(())(())(\n7\n1 1\n2 3\n1 2\n1 12\n8 12\n5 11\n2 10","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Program Files\\XCPC\\week 8\\pD.cpp","group":"local","local":true}
