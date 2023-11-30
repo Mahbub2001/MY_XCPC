@@ -24,7 +24,7 @@ typedef long double lld;
 #define debug(x)       \
     cerr << #x << " "; \
     _print(x);         \
-    cerr << el;
+    cerr << en;
 #else
 #define debug(x)
 #endif
@@ -202,78 +202,33 @@ struct FenwickTreeMin
 
 void TEST_CASES(ll testCase)
 {
-    int n;
-    string s;
-    cin >> n >> s;
-    int count = 0;
-    for (auto c : s)
-    {
-        if (c == '(')
-        {
-            count++;
-        }
-        else
-        {
-            count--;
-        }
-    }
-    if (count != 0)
-    {
-        cout << -1 << en;
-        return;
-    }
-    stack<int> st1, st2;
-    int count1 = 0, count2 = 0;
-    vector<int> v;
+    ll n, sum = 0;
+    cin >> n;
+    vector<ll> v(n);
     for (int i = 0; i < n; i++)
     {
-        if (s[i] == '(')
+        cin >> v[i];
+        if (i > 0)
         {
-            if (!st1.empty() && st1.top() == ')')
-            {
-                st1.pop();
-                v.push_back(1);
-                count1++;
-            }
-            else
-            {
-                st2.push(s[i]);
-                v.push_back(2);
-                count2++;
-            }
-        }
-        else
-        {
-            if (!st2.empty() && st2.top() == '(')
-            {
-                st2.pop();
-                v.push_back(2);
-            }
-            else
-            {
-                st1.push(s[i]);
-                v.push_back(1);
-            }
+            sum += abs(v[i] - v[i - 1]);
         }
     }
-    if (count1 && count2)
-    {
-        cout << 2 << en;
-        for (auto val : v)
-        {
-            cout << val << " ";
-        }
-        cout << en;
-    }
-    else
+    debug(sum);
+    if (sum == 0)
     {
         cout << 1 << en;
-        for (auto val : v)
-        {
-            cout << 1 << " ";
-        }
-        cout << en;
+        return;
     }
+    ll res = 2;
+    n = unique(v.begin(), v.end()) - v.begin();
+    for (int i = 1; i < n - 1; i++)
+    {
+        if ((v[i] > v[i - 1] && v[i] > v[i + 1]) || (v[i] < v[i - 1] && v[i] < v[i + 1]))
+        {
+            res++;
+        }
+    }
+    cout << res << en;
 }
 
 int32_t main()

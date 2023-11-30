@@ -1,0 +1,1 @@
+{"name":"Local: pp","url":"e:\\MY_XCPC\\pp.cpp","tests":[{"id":1701327735609,"input":"6\naab\nabcac\ndffe\ned\naa\naade","output":"6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\MY_XCPC\\pp.cpp","group":"local","local":true}
