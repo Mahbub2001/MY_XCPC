@@ -1,0 +1,1 @@
+{"name":"Local: M_Matrix_of_Differences","url":"e:\\MY_XCPC\\Super Zone week 9\\M_Matrix_of_Differences.cpp","tests":[{"id":1701431801891,"input":"2\n2\n3","output":"1 3\n4 2\n1 3 4\n9 2 7\n5 8 6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\MY_XCPC\\Super Zone week 9\\M_Matrix_of_Differences.cpp","group":"local","local":true}
