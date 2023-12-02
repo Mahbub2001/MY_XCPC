@@ -203,42 +203,35 @@ struct FenwickTreeMin
 void TEST_CASES(ll testCase)
 {
     ll n;
-    string s;
-    cin >> n >> s;
-    vector<ll> v(n);
-    for (ll i = 0; i < n; i++)
+    cin >> n;
+    vector<ll> d(n), v(n);
+    for (int i = 0; i < n; i++)
     {
-        cin >> v[i];
+        cin >> d[i];
     }
-    s += '0';
-    ll mn = LLONG_MAX, x = 0, sum = 0;
-    bool done = false;
-    for (ll i = 0; i < n; i++)
+    v[0] = d[0];
+    bool flag = true;
+    for (int i = 1; i < n; i++)
     {
-        if (s[i] == '0')
+        if (d[i] > 0 && v[i - 1] - d[i] >= 0)
         {
-            x = v[i];
+            flag = false;
+            break;
         }
-        if (s[i] == '1')
-        {
-            sum += v[i];
-            mn = min(mn, v[i]);
-            done = true;
-        }
-        if (s[i + 1] == '0')
-        {
-            if (done)
-            {
-                if (mn < x)
-                {
-                    sum += (x - mn);
-                }
-                done = false;
-                mn = LLONG_MAX;
-            }
-        }
+        v[i] = v[i - 1] + d[i];
     }
-    cout << sum << en;
+    if (!flag)
+    {
+        cout << -1 << en;
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+        {
+            cout << v[i] << " ";
+        }
+        cout << en;
+    }
 }
 
 int32_t main()

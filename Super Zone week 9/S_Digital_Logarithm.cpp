@@ -199,46 +199,57 @@ struct FenwickTreeMin
 //         }
 //     }
 // }
+int len(ll x)
+{
+    ll res = 0;
+    while (x != 0)
+    {
+        res++;
+        x /= 10;
+    }
+    return res;
+}
 
 void TEST_CASES(ll testCase)
 {
     ll n;
-    string s;
-    cin >> n >> s;
-    vector<ll> v(n);
+    cin >> n;
+    vector<ll> a(n), b(n);
+    priority_queue<ll> pq1, pq2;
     for (ll i = 0; i < n; i++)
     {
-        cin >> v[i];
+        cin >> a[i];
+        pq1.push(a[i]);
     }
-    s += '0';
-    ll mn = LLONG_MAX, x = 0, sum = 0;
-    bool done = false;
     for (ll i = 0; i < n; i++)
     {
-        if (s[i] == '0')
+        cin >> b[i];
+        pq2.push(b[i]);
+    }
+    ll ans = 0;
+    while (!pq1.empty() && !pq2.empty())
+    {
+        ll x = pq1.top();
+        ll y = pq2.top();
+        if (x == y)
         {
-            x = v[i];
+            pq1.pop();
+            pq2.pop();
         }
-        if (s[i] == '1')
+        else if (x > y)
         {
-            sum += v[i];
-            mn = min(mn, v[i]);
-            done = true;
+            pq1.pop();
+            pq1.push(len(x));
+            ans++;
         }
-        if (s[i + 1] == '0')
+        else
         {
-            if (done)
-            {
-                if (mn < x)
-                {
-                    sum += (x - mn);
-                }
-                done = false;
-                mn = LLONG_MAX;
-            }
+            pq2.pop();
+            pq2.push((len(y)));
+            ans++;
         }
     }
-    cout << sum << en;
+    cout << ans << en;
 }
 
 int32_t main()
