@@ -1,1 +1,1 @@
-{"name":"Local: pp","url":"e:\\MY_XCPC\\pp.cpp","tests":[{"id":1701327735609,"input":"6\naab\nabcac\ndffe\ned\naa\naade","output":"6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\MY_XCPC\\pp.cpp","group":"local","local":true}
+{"name":"Local: pp","url":"e:\\MY_XCPC\\pp.cpp","tests":[{"id":1701327735609,"input":"8 1\naabaabaa","output":"5"},{"id":1701580154012,"input":"4 2\nabba\n","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\MY_XCPC\\pp.cpp","group":"local","local":true}
