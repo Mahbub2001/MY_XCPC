@@ -1,6 +1,6 @@
 /**
  *   Author : Mahbub_Ahmed
- *   Created: 2023-12-05 20:20:24
+ *   Created: 2023-12-06 19:59:17
  **/
 #include <bits/stdc++.h>
 using namespace std;
@@ -206,42 +206,28 @@ struct FenwickTreeMin
 
 void TEST_CASES(ll testCase)
 {
-    ll n, k;
-    string s;
-    cin >> n >> k >> s;
-
-    if (k % 2 == 0)
+    ll n;
+    cin >> n;
+    vector<ll> v;
+    v.push_back(n);
+    while (n != 1)
     {
-        sort(s.begin(), s.end());
-        cout << s << en;
-        return;
-    }
-    deque<char> v1, v2;
-    for (int i = 0; i < n; i++)
-    {
-        if (i % 2 == 0)
+        ll x = (n & -n);
+        if (x == n)
         {
-            v1.push_back(s[i]);
+            n -= x / 2;
+            v.push_back(n);
         }
         else
         {
-            v2.push_back(s[i]);
+            n -= x;
+            v.push_back(n);
         }
     }
-    sort(v1.begin(), v1.end());
-    sort(v2.begin(), v2.end());
-    for (int i = 0; i < n; i++)
+    cout << v.size() << en;
+    for (ll val : v)
     {
-        if (i & 1)
-        {
-            cout << v2.front();
-            v2.pop_front();
-        }
-        else
-        {
-            cout << v1.front();
-            v1.pop_front();
-        }
+        cout << val << " ";
     }
     cout << en;
 }
