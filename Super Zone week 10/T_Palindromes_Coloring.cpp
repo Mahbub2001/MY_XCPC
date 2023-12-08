@@ -1,6 +1,6 @@
 /**
  *   Author : Mahbub_Ahmed
- *   Created: 2023-12-07 22:41:09
+ *   Created: 2023-12-08 23:12:51
  **/
 #include <bits/stdc++.h>
 using namespace std;
@@ -199,25 +199,34 @@ struct FenwickTreeMin
 //     {
 //         if (is_prime[i])
 //         {
-//             primes.push_bagck(i);
+//             primes.push_back(i);
 //         }
 //     }
 // }
 
 void TEST_CASES(ll testCase)
 {
-    string s, s1;
-    cin >> s;
-    s1 = s;
-    reverse(s1.begin(), s1.end());
-    if (s == s1)
+    ll n, k;
+    string s;
+    cin >> n >> k >> s;
+    unordered_map<char, ll> mp;
+    for (int i = 0; i < n; i++)
     {
-        cout << 0 << en;
+        mp[s[i]]++;
+    }
+    ll sum = 0, count = 0;
+    for (auto [first, second] : mp)
+    {
+        count += second % 2;
+        sum += second / 2;
+    }
+    if (count + (sum % k) * 2 >= k)
+    {
+        cout << 2 * (sum / k) + 1 << en;
     }
     else
     {
-        ll n = s.size();
-        cout << 3 << en << "R " << n - 1 << en << "L " << n << en << "L " << 2 << en;
+        cout << 2 * (sum / k) << en;
     }
 }
 
@@ -226,7 +235,7 @@ int32_t main()
     FastIO;
 
     ll t = 1;
-    // cin >> t;
+    cin >> t;
     for (ll test = 1; test <= t; test++)
     {
         TEST_CASES(test);
