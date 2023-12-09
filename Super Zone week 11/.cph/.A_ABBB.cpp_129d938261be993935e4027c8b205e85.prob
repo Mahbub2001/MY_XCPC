@@ -1,0 +1,1 @@
+{"name":"Local: A_ABBB","url":"e:\\Program Files\\MY_XCPC\\Super Zone week 11\\A_ABBB.cpp","tests":[{"id":1702119078456,"input":"3\nAAA\nBABA\nAABBBABBBB","output":"3\n2\n0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Program Files\\MY_XCPC\\Super Zone week 11\\A_ABBB.cpp","group":"local","local":true}
