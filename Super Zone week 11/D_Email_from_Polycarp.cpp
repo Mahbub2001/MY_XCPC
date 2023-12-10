@@ -1,6 +1,6 @@
 /**
  *   Author : Mahbub_Ahmed
- *   Created: 2023-12-10 20:10:09
+ *   Created: 2023-12-10 23:45:11
  **/
 #include <bits/stdc++.h>
 using namespace std;
@@ -206,41 +206,40 @@ struct FenwickTreeMin
 
 void TEST_CASES(ll testCase)
 {
-    ll n, k, d;
-    cin >> n >> k >> d;
+    string s1, s2;
+    cin >> s1 >> s2;
 
-    vector<ll> a(n);
-    for (ll i = 0; i < n; i++)
-    {
-        cin >> a[i];
-    }
-    unordered_map<ll, ll> mp;
-    ll count = 0;
-    for (ll i = 0; i < d; i++)
-    {
-        if (mp[a[i]] == 0)
-        {
-            count++;
-        }
-        mp[a[i]]++;
-    }
-    ll mn = count;
-    for (ll i = d; i < n; i++)
-    {
-        mp[a[i - d]]--;
-        if (mp[a[i - d]] == 0)
-        {
-            count--;
-        }
-        if (mp[a[i]] == 0)
-        {
-            count++;
-        }
-        mp[a[i]]++;
-        mn = min(mn, count);
-    }
+    int i = s1.length() - 1;
+    bool isValid = true;
 
-    cout << mn << en;
+    while (i >= 0)
+    {
+        if (s2.empty() || s2.back() != s1[i])
+        {
+            isValid = false;
+            break;
+        }
+
+        s2.pop_back();
+
+        if (i == 0 || s1[i - 1] != s1[i])
+        {
+            while (s2.size() && s2.back() == s1[i])
+            {
+                s2.pop_back();
+            }
+        }
+
+        i--;
+    }
+    if (isValid && s2.empty())
+    {
+        YES;
+    }
+    else
+    {
+        NO;
+    }
 }
 
 int32_t main()
