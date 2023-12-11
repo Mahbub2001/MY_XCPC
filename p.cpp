@@ -1,14 +1,35 @@
-#define ll long long
+#include <bits/stdc++.h>
+using namespace std;
+
+#define FastIO                        \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);
+#define en '\n'
+#define YES cout << "YES" << en
+#define NO cout << "NO" << en
+#define yes cout << "Yes" << en
+#define no cout << "No" << en
+#define fill_number(x, n) setfill('0') << setw(n) << (x)
+#define precision_number(x, n) fixed << setprecision(n) << (x)
+template <typename T>
+T lcm(T a, T b)
+{
+    return (a * (b / __gcd(a, b)));
+}
+
+typedef long long ll;
+
+// Sum
 template <class T, class U>
 // T -> node, U->update.
-struct Lsegtree
+struct Lazy_Segment_Tree
 {
     vector<T> st;
     vector<U> lazy;
     ll n;
     T identity_element;
     U identity_update;
-    Lsegtree(ll n, T identity_element, U identity_update)
+    Lazy_Segment_Tree(ll n, T identity_element, U identity_update)
     {
         this->n = n;
         this->identity_element = identity_element;
@@ -19,7 +40,16 @@ struct Lsegtree
     T combine(T l, T r)
     {
         // change this function as required.
-        T ans = (l + r);
+        T ans = (l + r); // sum of a range
+        // T ans = min(l, r); // min of a range
+        // T ans = max(l, r); // max of a range
+        // T ans = __gcd(l, r); // gcd of a range
+        // T ans = l | r; // or of a range
+        // T ans = l ^ r; // xor of a range
+        // T ans = l & r; // and of a range
+        // T ans = l * r; // product of a range
+        // T ans = l; // assign a value to a range
+
         return ans;
     }
     void buildUtil(ll v, ll tl, ll tr, vector<T> &a)
@@ -38,12 +68,22 @@ struct Lsegtree
     T apply(T curr, U upd, ll tl, ll tr)
     {
         T ans = (tr - tl + 1) * upd;
+        // T ans = curr + (tr - tl + 1) * upd; // increament range by upd
+        //  query,take max,update,assign a value T ans = upd;
+        //  T ans = upd; // query,take min,update,assign a value
+        //  query,take gcd,update,assign a value T ans = upd;
+        //  T ans = upd; // query,take or,update,assign a value
         return ans;
     }
     U combineUpdate(U old_upd, U new_upd, ll tl, ll tr)
     {
         U ans = old_upd;
         ans = new_upd;
+        // U ans = old_upd + new_upd; // adding a value to a range
+        //  U ans = new_upd;// assigning a value to a range
+        //  query,take max,update,assign a value U ans = new_upd;
+        //  U ans = new_upd; // query,take min,update,assign a value
+        //  query,take gcd,update,assign a value U ans = new_upd;
         return ans;
     }
     void push_down(ll v, ll tl, ll tr)
@@ -97,7 +137,7 @@ struct Lsegtree
 
     void build(vector<T> a)
     {
-        assert(sz(a) == n);
+        assert(a.size() == n);
         buildUtil(0, 0, n - 1, a);
     }
     T query(ll l, ll r)
@@ -109,3 +149,69 @@ struct Lsegtree
         updateUtil(0, 0, n - 1, l, r, upd);
     }
 };
+
+// const ll sieve_N = 2e7;
+// bool is_prime[sieve_N + 1];
+// vector<ll> primes;
+
+// void sieve()
+// {
+//     fill(is_prime, is_prime + sieve_N + 1, true);
+//     is_prime[0] = is_prime[1] = false;
+
+//     for (ll i = 2; i * i <= sieve_N; i++)
+//     {
+//         if (is_prime[i])
+//         {
+//             for (ll j = i * i; j <= sieve_N; j += i)
+//             {
+//                 is_prime[j] = false;
+//             }
+//         }
+//     }
+
+//     for (ll i = 2; i <= sieve_N; i++)
+//     {
+//         if (is_prime[i])
+//         {
+//             primes.push_back(i);
+//         }
+//     }
+// }
+
+void TEST_CASES(ll testCase)
+{
+    ll n, q;
+    cin >> n >> q;
+    vector<ll> a(n);
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    Lazy_Segment_Tree<ll, ll> tree(n, 0, -1);
+    // for sum = n,0,-1,for kth element= n,0,0,
+    // for max = n,LLONG_MIN,-1,for min = n,LLONG_MAX,-1,
+    tree.build(a);
+    while (q--)
+    {
+
+        ll l, r;
+        cin >> l >> r;
+        // l--;
+        cout << tree.query(l, r) << en;
+    }
+}
+
+int32_t main()
+{
+    FastIO;
+
+    ll t = 1;
+    // cin >> t;
+    for (ll test = 1; test <= t; test++)
+    {
+        TEST_CASES(test);
+    }
+
+    return 0;
+}
