@@ -150,35 +150,6 @@ struct Lazy_Segment_Tree
     }
 };
 
-// const ll sieve_N = 2e7;
-// bool is_prime[sieve_N + 1];
-// vector<ll> primes;
-
-// void sieve()
-// {
-//     fill(is_prime, is_prime + sieve_N + 1, true);
-//     is_prime[0] = is_prime[1] = false;
-
-//     for (ll i = 2; i * i <= sieve_N; i++)
-//     {
-//         if (is_prime[i])
-//         {
-//             for (ll j = i * i; j <= sieve_N; j += i)
-//             {
-//                 is_prime[j] = false;
-//             }
-//         }
-//     }
-
-//     for (ll i = 2; i <= sieve_N; i++)
-//     {
-//         if (is_prime[i])
-//         {
-//             primes.push_back(i);
-//         }
-//     }
-// }
-
 void TEST_CASES(ll testCase)
 {
     ll n, q;
