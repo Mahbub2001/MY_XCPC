@@ -1,6 +1,6 @@
 /**
  *   Author : Mahbub_Ahmed
- *   Created: 2023-12-14 19:37:05
+ *   Created: 2023-12-15 03:17:03
  **/
 #include <bits/stdc++.h>
 using namespace std;
@@ -206,36 +206,77 @@ struct FenwickTreeMin
 
 void TEST_CASES(ll testCase)
 {
-    ll n;
     string s;
-    cin >> n >> s;
-    s = "#" + s;
-    vector<ll> mp(n + 1, 0);
-    for (ll i = 1; i <= n; i++)
+    cin >> s;
+    bool flag = false;
+
+    stack<pair<char, ll>> stk;
+    for (auto &ch : s)
     {
-        if (s[i] == '1')
+        if (ch == '+')
         {
-            mp[i] = 2;
-        }
-    }
-    debug(mp);
-    ll count = 0;
-    for (ll i = 1; i <= n; i++)
-    {
-        for (ll j = i; j <= n; j += i)
-        {
-            if (mp[j] == 0)
+            if (!stk.empty())
             {
-                mp[j] = 1;
-                count += i;
+                if (stk.top().second == 0)
+                {
+                    stk.push({ch, 0});
+                }
+                else
+                {
+                    stk.push({ch, -1});
+                }
             }
-            else if (mp[j] == 2)
+            else
             {
-                break;
+                stk.push({ch, 1});
             }
         }
+        else if (ch == '-')
+        {
+            ll current = stk.top().second;
+            stk.pop();
+
+            if (current == 1)
+            {
+                if (!stk.empty())
+                {
+                    stk.top().second = 1;
+                }
+            }
+        }
+        else if (ch == '1')
+        {
+            if (!stk.empty())
+            {
+                if (stk.top().second == 0)
+                {
+                    NO;
+                    return;
+                }
+                stk.top().second = 1;
+            }
+        }
+        else
+        {
+            if (!stk.empty())
+            {
+                if (stk.top().second == 1)
+                {
+                    NO;
+                    return;
+                }
+                stk.top().second = 0;
+            }
+            else
+            {
+                NO;
+                return;
+            }
+        }
     }
-    cout << count << en;
+
+    if (!flag)
+        YES;
 }
 
 int32_t main()

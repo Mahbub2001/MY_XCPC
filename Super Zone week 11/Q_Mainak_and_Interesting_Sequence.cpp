@@ -1,6 +1,6 @@
 /**
  *   Author : Mahbub_Ahmed
- *   Created: 2023-12-14 19:37:05
+ *   Created: 2023-12-15 01:37:24
  **/
 #include <bits/stdc++.h>
 using namespace std;
@@ -206,36 +206,51 @@ struct FenwickTreeMin
 
 void TEST_CASES(ll testCase)
 {
-    ll n;
-    string s;
-    cin >> n >> s;
-    s = "#" + s;
-    vector<ll> mp(n + 1, 0);
-    for (ll i = 1; i <= n; i++)
+    ll n, m;
+    cin >> n >> m;
+
+    if (n > m)
     {
-        if (s[i] == '1')
-        {
-            mp[i] = 2;
-        }
+        no;
+        return;
     }
-    debug(mp);
-    ll count = 0;
-    for (ll i = 1; i <= n; i++)
+    vector<ll> a(n + 1);
+    ll sum = 0;
+    if (n % 2 == 0 && m % 2 == 0)
     {
-        for (ll j = i; j <= n; j += i)
+        yes;
+        for (ll i = 1; i <= n - 2; i++)
         {
-            if (mp[j] == 0)
-            {
-                mp[j] = 1;
-                count += i;
-            }
-            else if (mp[j] == 2)
-            {
-                break;
-            }
+            cout << 1 << " ";
+            sum++;
         }
+        cout << (m - sum)/2 << " " << (m - sum)/2 << en;
     }
-    cout << count << en;
+    else if ((n & 1) && (m & 1))
+    {
+        yes;
+        for (ll i = 1; i <= n - 1; i++)
+        {
+            cout << 1 << " ";
+            sum++;
+        }
+        cout << m - sum << en;
+    }
+    else if ((n & 1) && (m % 2 == 0))
+    {
+        yes;
+        for (ll i = 1; i <= n - 1; i++)
+        {
+            cout << 1 << " ";
+            sum++;
+        }
+        cout << m - sum << en;
+    }
+    else
+    {
+        no;
+        return;
+    }
 }
 
 int32_t main()

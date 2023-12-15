@@ -1,6 +1,6 @@
 /**
  *   Author : Mahbub_Ahmed
- *   Created: 2023-12-14 19:37:05
+ *   Created: 2023-12-15 23:10:53
  **/
 #include <bits/stdc++.h>
 using namespace std;
@@ -206,36 +206,37 @@ struct FenwickTreeMin
 
 void TEST_CASES(ll testCase)
 {
-    ll n;
-    string s;
-    cin >> n >> s;
-    s = "#" + s;
-    vector<ll> mp(n + 1, 0);
-    for (ll i = 1; i <= n; i++)
+    ll n, h;
+    cin >> n >> h;
+    vector<ll> a(n), diff(n);
+    for (ll i = 0; i < n; i++)
     {
-        if (s[i] == '1')
+        cin >> a[i];
+    }
+    for (int i = 0; i < n - 1; i++)
+    {
+        diff[i] = a[i + 1] - a[i];
+    }
+    diff[n - 1] = LLONG_MAX;
+    ll l = 0, r = 1e18;
+    while (l < r)
+    {
+        ll mid = l + (r - l) / 2;
+        ll sum = 0;
+        for (int i = 0; i < n; i++)
         {
-            mp[i] = 2;
+            sum += min(diff[i], mid);
+        }
+        if (sum < h)
+        {
+            l = mid + 1;
+        }
+        else
+        {
+            r = mid;
         }
     }
-    debug(mp);
-    ll count = 0;
-    for (ll i = 1; i <= n; i++)
-    {
-        for (ll j = i; j <= n; j += i)
-        {
-            if (mp[j] == 0)
-            {
-                mp[j] = 1;
-                count += i;
-            }
-            else if (mp[j] == 2)
-            {
-                break;
-            }
-        }
-    }
-    cout << count << en;
+    cout << r << en;
 }
 
 int32_t main()
