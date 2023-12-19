@@ -1,0 +1,1 @@
+{"name":"Local: E_Dominent_Character","url":"e:\\Program Files\\MY_XCPC\\Super Zone week 12\\E_Dominent_Character.cpp","tests":[{"id":1702991560175,"input":"3\n2\naa\n5\ncbabb\n8\ncacabccc","output":"2\n-1\n3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Program Files\\MY_XCPC\\Super Zone week 12\\E_Dominent_Character.cpp","group":"local","local":true}
