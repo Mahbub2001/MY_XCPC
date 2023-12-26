@@ -1,0 +1,1 @@
+{"name":"Local: H_Friendly_Arrays","url":"e:\\Program Files\\MY_XCPC\\Super Zone week 13\\H_Friendly_Arrays.cpp","tests":[{"id":1703591329823,"input":"2\n2 3\n0 1\n1 2 3\n3 1\n1 1 2\n1","output":"0 1\n2 3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\Program Files\\MY_XCPC\\Super Zone week 13\\H_Friendly_Arrays.cpp","group":"local","local":true}
