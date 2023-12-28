@@ -1,6 +1,6 @@
 /**
  *   Author : Mahbub_Ahmed
- *   Created: 2023-12-28 11:38:55
+ *   Created: 2023-12-28 11:42:56
  **/
 #include <bits/stdc++.h>
 using namespace std;
@@ -208,34 +208,47 @@ void TEST_CASES(ll testCase)
 {
     ll n;
     cin >> n;
-    ll idx = 0;
-    vector<ll> a(n + 1);
-    map<ll, ll> mp;
-    for (ll i = 1; i <= n; i++)
+
+    vector<ll> a(n);
+    for (ll i = 0; i < n; i++)
     {
         cin >> a[i];
-        mp[a[i]]++;
-        if (a[i] != a[1])
-        {
-            idx = i;
-        }
     }
-    if (mp.size() == 1)
+    priority_queue<ll> pq;
+    for (ll i = 0; i < n; i++)
     {
-        NO;
-        return;
+        pq.push(a[i]);
     }
-    YES;
-    for (ll i = 2; i <= n; i++)
+    ll max_freq = 0, cur_freq = 1, prev_ele = pq.top();
+    pq.pop();
+
+    while (!pq.empty())
     {
-        if (a[i] == a[1])
+        ll cur_ele = pq.top();
+        pq.pop();
+
+        if (cur_ele == prev_ele)
         {
-            cout << idx << " " << i << en;
+            cur_freq++;
         }
         else
         {
-            cout << 1 << " " << i << en;
+            max_freq = max(max_freq, cur_freq);
+            cur_freq = 1;
         }
+
+        prev_ele = cur_ele;
+    }
+
+    max_freq = max(max_freq, cur_freq);
+    ll ans = max_freq * 2;
+    if (ans > n)
+    {
+        cout << ans - n << en;
+    }
+    else
+    {
+        cout << (n % 2) << en;
     }
 }
 
